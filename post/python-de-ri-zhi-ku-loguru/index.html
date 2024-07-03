@@ -1,0 +1,315 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>python的日志库-Loguru | Yang</title>
+<link rel="shortcut icon" href="https://youxiangyang.github.io/mypages.github.io//favicon.ico?v=1720014010014">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://youxiangyang.github.io/mypages.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="python的日志库-Loguru | Yang - Atom Feed" href="https://youxiangyang.github.io/mypages.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="Loguru 是一个 Python 日志库，它提供了一种简单而强大的方式来记录日志，使得日志记录变得轻松愉快。以下是 Loguru 基本使用的介绍：
+
+快速使用
+安装 Loguru
+首先，您需要通过 pip 安装 Loguru：
+pip i..." />
+    <meta name="keywords" content="python" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://youxiangyang.github.io/mypages.github.io/">
+  <img class="avatar" src="https://youxiangyang.github.io/mypages.github.io//images/avatar.png?v=1720014010014" alt="">
+  </a>
+  <h1 class="site-title">
+    Yang
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="https://youxiangyang.github.io/mypages.github.io/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="https://youxiangyang.github.io/mypages.github.io/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="https://youxiangyang.github.io/mypages.github.io/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://youxiangyang.github.io/mypages.github.io/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              python的日志库-Loguru
+            </h2>
+            <div class="post-info">
+              <span>
+                2024-07-03
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://youxiangyang.github.io/mypages.github.io/tag/python/" class="post-tag">
+                  # python
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content" v-pre>
+                <p>Loguru 是一个 Python 日志库，它提供了一种简单而强大的方式来记录日志，使得日志记录变得轻松愉快。以下是 Loguru 基本使用的介绍：</p>
+<!-- more -->
+<h2 id="快速使用">快速使用</h2>
+<h3 id="安装-loguru">安装 Loguru</h3>
+<p>首先，您需要通过 pip 安装 Loguru：</p>
+<pre><code class="language-bash">pip install loguru
+</code></pre>
+<h3 id="导入-loguru">导入 Loguru</h3>
+<p>安装完成后，在您的 Python 脚本中导入 Loguru：</p>
+<pre><code class="language-python">from loguru import logger
+</code></pre>
+<h3 id="配置-loguru">配置 Loguru</h3>
+<p>Loguru 允许您通过装饰器 <code>@logger.catch</code> 来配置日志的基本行为，例如设置日志级别、输出格式和输出位置等。例如：</p>
+<pre><code class="language-python"># 设置日志级别为 DEBUG
+logger.level(&quot;DEBUG&quot;)
+# 设置日志格式
+logger.format(&quot;({time:YYYY-MM-DD at HH:mm:ss}) {level} - {message}&quot;)
+# 设置日志输出到文件
+logger.add(&quot;myapp.log&quot;, rotation=&quot;1 week&quot;, compression=&quot;zip&quot;)
+# 设置日志回滚
+logger.add(&quot;myapp.log&quot;, rotation=&quot;10 MB&quot;, compression=&quot;zip&quot;, level=&quot;ERROR&quot;)
+</code></pre>
+<h3 id="记录日志">记录日志</h3>
+<p>使用 Loguru 记录日志非常简单，您可以直接调用 <code>logger</code> 对象的相应方法来记录不同级别的日志：</p>
+<pre><code class="language-python">logger.debug(&quot;This is a debug message&quot;)
+logger.info(&quot;This is an info message&quot;)
+logger.warning(&quot;This is a warning message&quot;)
+logger.error(&quot;This is an error message&quot;)
+logger.critical(&quot;This is a critical message&quot;)
+</code></pre>
+<h3 id="异常处理">异常处理</h3>
+<p>Loguru 可以自动捕捉未处理的异常，并将其记录为日志：</p>
+<pre><code class="language-python">try:
+    1 / 0
+except ZeroDivisionError:
+    logger.exception(&quot;Attempted to divide by zero&quot;)
+</code></pre>
+<h3 id="装饰器">装饰器</h3>
+<p>Loguru 还提供了装饰器，可以用来记录函数的执行时间或捕获函数中的异常：</p>
+<pre><code class="language-python">@logger.catch
+def my_function():
+    # 函数代码
+    pass
+
+@logger.timeit
+def my_timed_function():
+    # 函数代码
+    pass
+</code></pre>
+<h2 id="高级用法示例">高级用法示例</h2>
+<p>Loguru 提供了许多高级用法，这些功能可以帮助您更有效地进行日志记录和管理。以下是一些高级用法的示例：</p>
+<h3 id="1-自定义日志处理器">1. 自定义日志处理器</h3>
+<p>您可以使用 <code>add()</code> 方法来添加自定义的日志处理器，例如将日志输出到不同的文件或位置：</p>
+<pre><code class="language-python"># 将日志输出到控制台和文件
+logger.add(sys.stdout, level=&quot;INFO&quot;)
+logger.add(&quot;myapp.log&quot;, level=&quot;ERROR&quot;)
+</code></pre>
+<h3 id="2-动态更改日志级别">2. 动态更改日志级别</h3>
+<p>您可以在运行时动态更改日志级别，以适应不同的调试需求：</p>
+<pre><code class="language-python"># 动态更改日志级别
+logger.level(&quot;WARNING&quot;)
+</code></pre>
+<h3 id="3-日志回滚">3. 日志回滚</h3>
+<p>Loguru 支持日志文件的自动回滚，例如，当日志文件达到一定大小或一定时间后自动创建新文件：</p>
+<pre><code class="language-python"># 每天回滚日志文件
+logger.add(&quot;myapp.log&quot;, rotation=&quot;1 day&quot;)
+
+# 达到一定大小后回滚
+logger.add(&quot;myapp.log&quot;, rotation=&quot;10 MB&quot;)
+</code></pre>
+<h3 id="4-日志压缩">4. 日志压缩</h3>
+<p>当日志文件回滚时，旧的日志文件可以被压缩，以节省存储空间：</p>
+<pre><code class="language-python">logger.add(&quot;myapp.log&quot;, rotation=&quot;1 week&quot;, compression=&quot;zip&quot;)
+</code></pre>
+<h3 id="5-过滤日志">5. 过滤日志</h3>
+<p>您可以使用过滤器来控制哪些日志消息应该被记录：</p>
+<pre><code class="language-python">def my_filter(record):
+    return record[&quot;level&quot;].no &gt;= 30  # 只记录ERROR及以上级别的日志
+
+# 添加带有过滤器的日志处理器
+logger.add(&quot;myapp.log&quot;, filter=my_filter)
+</code></pre>
+<h3 id="6-格式化日志">6. 格式化日志</h3>
+<p>您可以自定义日志的格式，包括时间戳、日志级别、消息等：</p>
+<pre><code class="language-python"># 自定义日志格式
+logger.format(
+    &quot;[{time:YYYY-MM-DD at HH:mm:ss.SSS}] {level:&lt;8} | {message}&quot;,
+    format_time=lambda t: t.strftime(&quot;%Y-%m-%d %H:%M:%S.%f&quot;)[:-3],
+)
+</code></pre>
+<h3 id="7-记录异常信息">7. 记录异常信息</h3>
+<p>Loguru 可以自动记录异常信息，包括堆栈跟踪，这对于调试非常有帮助：</p>
+<pre><code class="language-python">try:
+    # 可能引发异常的代码
+    pass
+except Exception as e:
+    logger.opt(exception=True).error(&quot;An error occurred&quot;)
+</code></pre>
+<h3 id="8-使用上下文管理器">8. 使用上下文管理器</h3>
+<p>Loguru 还提供了上下文管理器，允许您临时更改日志记录的行为：</p>
+<pre><code class="language-python">with logger.contextualize(extra=dict(component=&quot;auth&quot;)):
+    logger.info(&quot;This log message will have an 'extra' field with 'component' key&quot;)
+</code></pre>
+<h3 id="9-性能测试">9. 性能测试</h3>
+<p>Loguru 还可以用来测量代码块的执行时间，这对于性能测试非常有用：</p>
+<pre><code class="language-python">with logger.timeit():
+    # 执行一些操作
+    pass
+</code></pre>
+<h3 id="10-集成第三方库">10. 集成第三方库</h3>
+<p>Loguru 可以与许多第三方库集成，例如 Flask、Django 等，以提供更丰富的日志记录功能。</p>
+<p>这些高级用法展示了 Loguru 的灵活性和强大功能，使其成为 Python 日志记录的强大工具。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8">快速使用</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-loguru">安装 Loguru</a></li>
+<li><a href="#%E5%AF%BC%E5%85%A5-loguru">导入 Loguru</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-loguru">配置 Loguru</a></li>
+<li><a href="#%E8%AE%B0%E5%BD%95%E6%97%A5%E5%BF%97">记录日志</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86">异常处理</a></li>
+<li><a href="#%E8%A3%85%E9%A5%B0%E5%99%A8">装饰器</a></li>
+</ul>
+</li>
+<li><a href="#%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B">高级用法示例</a>
+<ul>
+<li><a href="#1-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86%E5%99%A8">1. 自定义日志处理器</a></li>
+<li><a href="#2-%E5%8A%A8%E6%80%81%E6%9B%B4%E6%94%B9%E6%97%A5%E5%BF%97%E7%BA%A7%E5%88%AB">2. 动态更改日志级别</a></li>
+<li><a href="#3-%E6%97%A5%E5%BF%97%E5%9B%9E%E6%BB%9A">3. 日志回滚</a></li>
+<li><a href="#4-%E6%97%A5%E5%BF%97%E5%8E%8B%E7%BC%A9">4. 日志压缩</a></li>
+<li><a href="#5-%E8%BF%87%E6%BB%A4%E6%97%A5%E5%BF%97">5. 过滤日志</a></li>
+<li><a href="#6-%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%97%A5%E5%BF%97">6. 格式化日志</a></li>
+<li><a href="#7-%E8%AE%B0%E5%BD%95%E5%BC%82%E5%B8%B8%E4%BF%A1%E6%81%AF">7. 记录异常信息</a></li>
+<li><a href="#8-%E4%BD%BF%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8">8. 使用上下文管理器</a></li>
+<li><a href="#9-%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95">9. 性能测试</a></li>
+<li><a href="#10-%E9%9B%86%E6%88%90%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93">10. 集成第三方库</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://youxiangyang.github.io/mypages.github.io/post/python-zhong-de-exithan-shu/">
+              <h3 class="post-title">
+                python中的exit()函数
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Hello World
+  <a class="rss" href="https://youxiangyang.github.io/mypages.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
