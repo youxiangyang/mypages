@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark)"
+    href="/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark)"
+          href="/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          href="/theme/pygments/monokai.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#333333">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#333333">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#333333">
+
+  <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="沐子 Atom">
+
+
+
+ 
+
+<meta name="author" content="xiangyang" />
+<meta name="description" content="PostgreSQL中常用的时间函数" />
+<meta name="keywords" content="PostgreSQL">
+
+
+  <meta property="og:site_name" content="沐子"/>
+  <meta property="og:title" content="PostgreSQL中常用的时间函数"/>
+  <meta property="og:description" content="PostgreSQL中常用的时间函数"/>
+  <meta property="og:locale" content="zh_CN"/>
+  <meta property="og:url" content="/postgresqlzhong-chang-yong-de-shi-jian-han-shu.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-11-06 00:00:00+08:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="/author/xiangyang.html">
+  <meta property="article:section" content="DataBase"/>
+  <meta property="article:tag" content="PostgreSQL"/>
+  <meta property="og:image" content="">
+
+  <title>沐子 &ndash; PostgreSQL中常用的时间函数</title>
+
+
+</head>
+<body >
+
+<aside>
+  <div>
+    <a href="/">
+      <img src="/theme/img/profile.png" alt="" title="">
+    </a>
+
+    <h1>
+      <a href="/"></a>
+    </h1>
+
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="/pages/about.html">
+                About
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="/pages/contact.html">
+                Contact
+              </a>
+            </li>
+
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-白日与明月"
+           href="#"
+           target="_blank">
+          <i class="fa-brands fa-白日与明月"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+  <a href="/feeds/all.atom.xml">Atom</a>
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="postgresqlzhong-chang-yong-de-shi-jian-han-shu">PostgreSQL中常用的时间函数</h1>
+    <p>
+      Posted on 周三 06 十一月 2024 in <a href="/category/database.html">DataBase</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>在PostgreSQL中常用的时间函数及其使用方式和简单的SQL例子：</p>
+<h3>1. <code>CURRENT_TIMESTAMP</code></h3>
+<p>返回当前日期和时间。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>2. <code>EXTRACT(field FROM source)</code></h3>
+<p>从日期/时间值中提取特定的部分（如年、月、日等）。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">YEAR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">year</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>3. <code>AGE(source, target)</code></h3>
+<p>返回<code>source</code>和<code>target</code>之间的时间差。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">AGE</span><span class="p">(</span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="s1">&#39;2000-01-01 00:00:00&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>4. <code>TO_TIMESTAMP(text, format)</code></h3>
+<p>将字符串转换为时间戳。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="s1">&#39;2023-01-01 14:30:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>5. <code>TO_DATE(text, format)</code></h3>
+<p>将字符串转换为日期。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">TO_DATE</span><span class="p">(</span><span class="s1">&#39;2023-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;YYYY-MM-DD&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>6. <code>NOW()</code></h3>
+<p>返回当前日期和时间（与<code>CURRENT_TIMESTAMP</code>类似）。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">NOW</span><span class="p">();</span>
+</code></pre></div>
+
+<h3>7. <code>LOCALTIME</code></h3>
+<p>返回当前时间，不包含时区信息。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">LOCALTIME</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>8. <code>LOCALTIMESTAMP</code></h3>
+<p>返回当前日期和时间，不包含时区信息。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">LOCALTIMESTAMP</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>9. <code>DATE_PART(text, source)</code></h3>
+<p>与<code>EXTRACT</code>类似，用于提取日期/时间值的一部分。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">DATE_PART</span><span class="p">(</span><span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">day_of_month</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>10. <code>DATE_TRUNC(text, source)</code></h3>
+<p>将日期/时间值截断到指定的精度。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">DATE_TRUNC</span><span class="p">(</span><span class="s1">&#39;hour&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>11. <code>INTERVAL</code></h3>
+<p>用于创建时间间隔，可以与日期和时间进行加减。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 day&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>12. <code>TIMESTAMP</code></h3>
+<p>用于创建时间戳值。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="s1">&#39;2023-01-01 00:00:00&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<p>这些是PostgreSQL中一些常用的日期和时间函数。每个函数都有其特定的用途，你可以根据需要选择合适的函数来处理数据库中的日期和时间数据。</p>
+<p>PostgreSQL 提供了一系列用于时间计算的函数，以下是一些常用的函数及其用途：</p>
+<h3>时间加减</h3>
+<h4><code>interval 'value' +</code></h4>
+<p>将间隔添加到时间戳。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 hour&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h4><code>interval 'value' -</code></h4>
+<p>从时间戳减去间隔。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;2 days&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h3>时间差计算</h3>
+<h4><code>AGE(timestamp, timestamp)</code></h4>
+<p>计算两个时间戳之间的间隔。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">AGE</span><span class="p">(</span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="s1">&#39;2023-12-31 23:59:59&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="s1">&#39;2023-01-01 00:00:00&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h4><code>JUSTIFY_DAYS(interval)</code></h4>
+<p>调整间隔，使其天数在合理的范围内（-29 through 29）。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">JUSTIFY_DAYS</span><span class="p">(</span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;35 days&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h4><code>JUSTIFY_HOURS(interval)</code></h4>
+<p>调整间隔，使其小时数在合理的范围内（-23 through 23）。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">JUSTIFY_HOURS</span><span class="p">(</span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;26 hours&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h4><code>JUSTIFY_INTERVAL(interval)</code></h4>
+<p>调整间隔，使其所有字段都在合理的范围内。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">JUSTIFY_INTERVAL</span><span class="p">(</span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 year 15 months&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>时间转换</h3>
+<h4><code>TO_CHAR(timestamp, text)</code></h4>
+<p>将时间戳转换为字符串。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">TO_CHAR</span><span class="p">(</span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h4><code>TO_TIMESTAMP(text, text)</code></h4>
+<p>将字符串转换为时间戳。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">TO_TIMESTAMP</span><span class="p">(</span><span class="s1">&#39;2023-01-01 00:00:00&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;YYYY-MM-DD HH24:MI:SS&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>时间截断</h3>
+<h4><code>DATE_TRUNC(text, timestamp)</code></h4>
+<p>将时间戳截断到指定的精度。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">DATE_TRUNC</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>时间间隔函数</h3>
+<h4><code>INTERVAL</code></h4>
+<p>创建时间间隔。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 day&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h4>`MAKE_INTERVAL(years =&gt; integer, ...)</h4>
+<p>创建一个间隔，可以指定年、月、日、小时等。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">MAKE_INTERVAL</span><span class="p">(</span><span class="n">days</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+</code></pre></div>
+
+<h3>特定时间计算</h3>
+<h4><code>AT TIME ZONE zone</code></h4>
+<p>将时间戳转换为指定时区的时间。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="w"> </span><span class="k">AT</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="s1">&#39;UTC&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+<h4><code>CLOCK_TIMESTAMP()</code></h4>
+<p>返回当前实际时间（可能比<code>CURRENT_TIMESTAMP</code>更精确）。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">CLOCK_TIMESTAMP</span><span class="p">();</span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/postgresql.html">PostgreSQL</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2024 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="light"
+          type="text/javascript">
+  </script>
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " 沐子 ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

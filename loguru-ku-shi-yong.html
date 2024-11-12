@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="chinese (simplified)">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet/less" type="text/css" href="/theme/stylesheet/style.less">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark)"
+    href="/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark)"
+          href="/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)"
+          href="/theme/pygments/monokai.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#333333">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#333333">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#333333">
+
+  <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="沐子 Atom">
+
+
+
+ 
+
+<meta name="author" content="xiangyang" />
+<meta name="description" content="Loguru 是一个 Python 日志库，它提供了一种简单而强大的方式来记录日志，使得日志记录变得轻松愉快。" />
+<meta name="keywords" content="python">
+
+
+  <meta property="og:site_name" content="沐子"/>
+  <meta property="og:title" content="Loguru 库使用"/>
+  <meta property="og:description" content="Loguru 是一个 Python 日志库，它提供了一种简单而强大的方式来记录日志，使得日志记录变得轻松愉快。"/>
+  <meta property="og:locale" content="zh_CN"/>
+  <meta property="og:url" content="/loguru-ku-shi-yong.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-10-31 00:00:00+08:00"/>
+  <meta property="article:modified_time" content="2024-10-31 00:00:00+08:00"/>
+  <meta property="article:author" content="/author/xiangyang.html">
+  <meta property="article:section" content="开发"/>
+  <meta property="article:tag" content="python"/>
+  <meta property="og:image" content="">
+
+  <title>沐子 &ndash; Loguru 库使用</title>
+
+
+</head>
+<body >
+
+<aside>
+  <div>
+    <a href="/">
+      <img src="/theme/img/profile.png" alt="" title="">
+    </a>
+
+    <h1>
+      <a href="/"></a>
+    </h1>
+
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="/pages/about.html">
+                About
+              </a>
+            </li>
+            <li>
+              <a target="_self"
+                 href="/pages/contact.html">
+                Contact
+              </a>
+            </li>
+
+      </ul>
+    </nav>
+
+    <ul class="social">
+      <li>
+        <a class="sc-白日与明月"
+           href="#"
+           target="_blank">
+          <i class="fa-brands fa-白日与明月"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="/">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+  <a href="/feeds/all.atom.xml">Atom</a>
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="loguru-ku-shi-yong">Loguru 库使用</h1>
+    <p>
+      Posted on 周四 31 十月 2024 in <a href="/category/kai-fa.html">开发</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h2>快速使用</h2>
+<h3>安装 Loguru</h3>
+<p>首先，您需要通过 pip 安装 Loguru：</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>loguru
+</code></pre></div>
+
+<h3>导入 Loguru</h3>
+<p>安装完成后，在您的 Python 脚本中导入 Loguru：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+</code></pre></div>
+
+<h3>配置 Loguru</h3>
+<p>Loguru 允许您通过装饰器 <code>@logger.catch</code> 来配置日志的基本行为，例如设置日志级别、输出格式和输出位置等。例如：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 设置日志级别为 DEBUG</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">)</span>
+<span class="c1"># 设置日志格式</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;({time:YYYY-MM-DD at HH:mm:ss}) </span><span class="si">{level}</span><span class="s2"> - </span><span class="si">{message}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="c1"># 设置日志输出到文件</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;myapp.log&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;1 week&quot;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;zip&quot;</span><span class="p">)</span>
+<span class="c1"># 设置日志回滚</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;myapp.log&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;10 MB&quot;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;zip&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;ERROR&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>记录日志</h3>
+<p>使用 Loguru 记录日志非常简单，您可以直接调用 <code>logger</code> 对象的相应方法来记录不同级别的日志：</p>
+<div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;This is a debug message&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This is an info message&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;This is a warning message&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;This is an error message&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;This is a critical message&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>异常处理</h3>
+<p>Loguru 可以自动捕捉未处理的异常，并将其记录为日志：</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="s2">&quot;Attempted to divide by zero&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>装饰器</h3>
+<p>Loguru 还提供了装饰器，可以用来记录函数的执行时间或捕获函数中的异常：</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@logger</span><span class="o">.</span><span class="n">catch</span>
+<span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+    <span class="c1"># 函数代码</span>
+    <span class="k">pass</span>
+
+<span class="nd">@logger</span><span class="o">.</span><span class="n">timeit</span>
+<span class="k">def</span> <span class="nf">my_timed_function</span><span class="p">():</span>
+    <span class="c1"># 函数代码</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<h2>高级用法示例</h2>
+<p>Loguru 提供了许多高级用法，这些功能可以帮助您更有效地进行日志记录和管理。以下是一些高级用法的示例：</p>
+<h3>1. 自定义日志处理器</h3>
+<p>您可以使用 <code>add()</code> 方法来添加自定义的日志处理器，例如将日志输出到不同的文件或位置：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 将日志输出到控制台和文件</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;myapp.log&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;ERROR&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>2. 动态更改日志级别</h3>
+<p>您可以在运行时动态更改日志级别，以适应不同的调试需求：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 动态更改日志级别</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>3. 日志回滚</h3>
+<p>Loguru 支持日志文件的自动回滚，例如，当日志文件达到一定大小或一定时间后自动创建新文件：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 每天回滚日志文件</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;myapp.log&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;1 day&quot;</span><span class="p">)</span>
+
+<span class="c1"># 达到一定大小后回滚</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;myapp.log&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;10 MB&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>4. 日志压缩</h3>
+<p>当日志文件回滚时，旧的日志文件可以被压缩，以节省存储空间：</p>
+<div class="highlight"><pre><span></span><code><span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;myapp.log&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="s2">&quot;1 week&quot;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;zip&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>5. 过滤日志</h3>
+<p>您可以使用过滤器来控制哪些日志消息应该被记录：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">my_filter</span><span class="p">(</span><span class="n">record</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;level&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">no</span> <span class="o">&gt;=</span> <span class="mi">30</span>  <span class="c1"># 只记录ERROR及以上级别的日志</span>
+
+<span class="c1"># 添加带有过滤器的日志处理器</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;myapp.log&quot;</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="n">my_filter</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>6. 格式化日志</h3>
+<p>您可以自定义日志的格式，包括时间戳、日志级别、消息等：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 自定义日志格式</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="s2">&quot;[{time:YYYY-MM-DD at HH:mm:ss.SSS}] </span><span class="si">{level:&lt;8}</span><span class="s2"> | </span><span class="si">{message}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">format_time</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<h3>7. 记录异常信息</h3>
+<p>Loguru 可以自动记录异常信息，包括堆栈跟踪，这对于调试非常有帮助：</p>
+<div class="highlight"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="c1"># 可能引发异常的代码</span>
+    <span class="k">pass</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">opt</span><span class="p">(</span><span class="n">exception</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;An error occurred&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>8. 使用上下文管理器</h3>
+<p>Loguru 还提供了上下文管理器，允许您临时更改日志记录的行为：</p>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">logger</span><span class="o">.</span><span class="n">contextualize</span><span class="p">(</span><span class="n">extra</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s2">&quot;auth&quot;</span><span class="p">)):</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;This log message will have an &#39;extra&#39; field with &#39;component&#39; key&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>9. 性能测试</h3>
+<p>Loguru 还可以用来测量代码块的执行时间，这对于性能测试非常有用：</p>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">logger</span><span class="o">.</span><span class="n">timeit</span><span class="p">():</span>
+    <span class="c1"># 执行一些操作</span>
+    <span class="k">pass</span>
+</code></pre></div>
+
+<h3>10. 集成第三方库</h3>
+<p>Loguru 可以与许多第三方库集成，例如 Flask、Django 等，以提供更丰富的日志记录功能。</p>
+<p>这些高级用法展示了 Loguru 的灵活性和强大功能，使其成为 Python 日志记录的强大工具。</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2024 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="light"
+          type="text/javascript">
+  </script>
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " 沐子 ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>

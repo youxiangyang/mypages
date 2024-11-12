@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>沐子 - 开发</title><link href="/" rel="alternate"></link><link href="/feeds/kai-fa.atom.xml" rel="self"></link><id>/</id><updated>2024-10-31T00:00:00+08:00</updated><entry><title>Jinja2 库使用</title><link href="/jinja2-ku-shi-yong.html" rel="alternate"></link><published>2024-10-31T00:00:00+08:00</published><updated>2024-10-31T00:00:00+08:00</updated><author><name>xiangyang</name></author><id>tag:None,2024-10-31:/jinja2-ku-shi-yong.html</id><summary type="html">&lt;p&gt;Jinja2 是一个现代的、设计友好的模板语言，用于 Python，它允许你在 HTML、XML 或其他文本格式中嵌入 Python 代码&lt;/p&gt;</summary><content type="html">&lt;p&gt;@[toc]&lt;/p&gt;
+&lt;p&gt;在Jinja2中，可以使用字符串作为模板源而非文件路径。这可以通过创建一个&lt;code&gt;Template&lt;/code&gt;对象并直接传入模板字符串来实现。下面是一个简单的例子说明如何做到这一点：&lt;/p&gt;
+&lt;p&gt;首先，确保已经安装了Jinja2库。如果还没有安装，可以通过pip安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;jinja2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;然后，可以按照下面的方式使用字符串模板：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;jinja2&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Template&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 定义你的模板字符串&lt;/span&gt;
+&lt;span class="n"&gt;template_string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;Hello {{ name }},&lt;/span&gt;
+&lt;span class="s2"&gt;This is an example of using a Jinja2 template from a string.&lt;/span&gt;
+&lt;span class="s2"&gt;Today&amp;#39;s date is {{ today_date }}.&lt;/span&gt;
+&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 创建一个Template对象，传入模板字符串&lt;/span&gt;
+&lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template_string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 定义渲染模板所需的数据字典&lt;/span&gt;
+&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;John Doe&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;today_date&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;2023-04-01&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 渲染模板&lt;/span&gt;
+&lt;span class="n"&gt;output&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;在这个例子中，&lt;code&gt;template_string&lt;/code&gt;变量包含了模板的定义，其中&lt;code&gt;{{ name }}&lt;/code&gt;和&lt;code&gt;{{ today_date }}&lt;/code&gt;是待替换的变量。我们通过&lt;code&gt;Template(template_string)&lt;/code&gt;创建了一个模板对象，然后使用&lt;code&gt;render(data)&lt;/code&gt;方法传入数据字典来渲染模板，最终得到渲染后的字符串输出。&lt;/p&gt;
+&lt;h2&gt;使用本地文件作为模板进行渲染&lt;/h2&gt;
+&lt;p&gt;下面是一个简单的例子&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;jinja2&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;FileSystemLoader&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 设置模板文件所在的目录&lt;/span&gt;
+&lt;span class="n"&gt;template_dir&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;templates&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;# 创建Jinja2环境对象&lt;/span&gt;
+&lt;span class="n"&gt;env&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Environment&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;loader&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;FileSystemLoader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;template_dir&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="c1"&gt;# 选择模板文件&lt;/span&gt;
+&lt;span class="n"&gt;template&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;env&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;my_template.jinja&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 准备数据&lt;/span&gt;
+&lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Jinja2 Template&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;content&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Hello, Jinja2!}&lt;/span&gt;
+&lt;span class="c1"&gt;# 渲染模板&lt;/span&gt;
+&lt;span class="n"&gt;rendered_template&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;template&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 输出渲染后的内容&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rendered_template&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 保存到文件&lt;/span&gt;
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;output.html&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rendered_template&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;模板文件:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt; &lt;span class="na"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;{{ title }}&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;{{ title }}&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;h1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;{{ content }}&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;模板语法&lt;/h2&gt;
+&lt;p&gt;Jinja2 是一个现代的、设计友好的模板语言，用于 Python，它允许你在 HTML、XML 或其他文本格式中嵌入 Python 代码。以下是一些 Jinja2 的主要模板语法要点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;变量&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;{{ variable }}&lt;/code&gt; 语法来输出变量的值。&lt;/li&gt;
+&lt;li&gt;变量可以是一个字符串、数字、列表、字典或任何 Python 对象。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;注释&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;{# ... #}&lt;/code&gt; 来包含注释，这些注释不会在渲染的输出中出现。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制结构&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;for&lt;/code&gt; 循环：使用 &lt;code&gt;{% for item in sequence %}...{% endfor %}&lt;/code&gt; 来循环遍历序列。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;if&lt;/code&gt; 语句：使用 &lt;code&gt;{% if condition %}...{% elif condition %}...{% else %}...{% endif %}&lt;/code&gt; 来进行条件判断。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;macro&lt;/code&gt;：使用 &lt;code&gt;{% macro name(parameters) %}...{% endmacro %}&lt;/code&gt; 来定义宏，可以在模板中重用代码块。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;call&lt;/code&gt;：使用 &lt;code&gt;{% call macro() %}...{% endcall %}&lt;/code&gt; 来调用宏。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;过滤器&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;{{ variable | filter }}&lt;/code&gt; 语法来对变量应用过滤器，以转换输出。&lt;/li&gt;
+&lt;li&gt;例如，&lt;code&gt;{{ name | upper }}&lt;/code&gt; 将变量 &lt;code&gt;name&lt;/code&gt; 的值转换为大写。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;继承&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;{% extends "base.html" %}&lt;/code&gt; 来继承另一个模板。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;{% block name %}...{% endblock %}&lt;/code&gt; 来定义在子模板中可以覆盖的块。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;包含&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;{% include "fragment.html" %}&lt;/code&gt; 来包含另一个模板文件的内容。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;静态文件&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;{% static "file.path" %}&lt;/code&gt; 来引用静态文件，如 CSS 或 JavaScript 文件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;循环中的特殊变量&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;loop.index&lt;/code&gt;：当前迭代的索引（从 1 开始）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;loop.index0&lt;/code&gt;：当前迭代的索引（从 0 开始）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;loop.revindex&lt;/code&gt;：到循环结束的迭代次数（从 1 开始）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;loop.revindex0&lt;/code&gt;：到循环结束的迭代次数（从 0 开始）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;loop.first&lt;/code&gt;：如果是第一次迭代，则为 True。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;loop.last&lt;/code&gt;：如果是最后一次迭代，则为 True。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;空白控制&lt;/strong&gt;：&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;-&lt;/code&gt; 符号紧跟 &lt;code&gt;{%&lt;/code&gt; 或 &lt;code&gt;%}&lt;/code&gt; 来消除标签周围的空白。&lt;/li&gt;
+&lt;li&gt;例如，&lt;code&gt;{% for item in seq -%}&lt;/code&gt; 和 &lt;code&gt;{%- endfor %}&lt;/code&gt; 将不会在输出中产生额外的空白行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;转义&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;{% raw %}...{% endraw %}&lt;/code&gt; 来禁用内嵌代码的转义。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;测试&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;{{ variable is test }}&lt;/code&gt; 语法来进行测试，例如 &lt;code&gt;{{ name is defined }}&lt;/code&gt; 检查变量是否已定义。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;全局变量&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;Jinja2 提供了一些全局变量，如 &lt;code&gt;request&lt;/code&gt;、&lt;code&gt;session&lt;/code&gt; 等，取决于应用程序是如何配置的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自定义过滤器、测试和全局函数&lt;/strong&gt;：&lt;ul&gt;
+&lt;li&gt;可以在 Jinja2 环境中注册自定义的过滤器、测试和全局函数，以便在模板中使用。
+这些是 Jinja2 模板语言的一些基本语法和功能。Jinja2 的强大之处在于它的灵活性和易于扩展性，允许开发者根据自己的需求定制模板的功能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="开发"></category><category term="python"></category></entry><entry><title>Loguru 库使用</title><link href="/loguru-ku-shi-yong.html" rel="alternate"></link><published>2024-10-31T00:00:00+08:00</published><updated>2024-10-31T00:00:00+08:00</updated><author><name>xiangyang</name></author><id>tag:None,2024-10-31:/loguru-ku-shi-yong.html</id><summary type="html">&lt;p&gt;Loguru 是一个 Python 日志库，它提供了一种简单而强大的方式来记录日志，使得日志记录变得轻松愉快。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;快速使用&lt;/h2&gt;
+&lt;h3&gt;安装 Loguru&lt;/h3&gt;
+&lt;p&gt;首先，您需要通过 pip 安装 Loguru：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;loguru
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;导入 Loguru&lt;/h3&gt;
+&lt;p&gt;安装完成后，在您的 Python 脚本中导入 Loguru：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;loguru&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;配置 Loguru&lt;/h3&gt;
+&lt;p&gt;Loguru 允许您通过装饰器 &lt;code&gt;@logger.catch&lt;/code&gt; 来配置日志的基本行为，例如设置日志级别、输出格式和输出位置等。例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 设置日志级别为 DEBUG&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;DEBUG&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 设置日志格式&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;({time:YYYY-MM-DD at HH:mm:ss}) &lt;/span&gt;&lt;span class="si"&gt;{level}&lt;/span&gt;&lt;span class="s2"&gt; - &lt;/span&gt;&lt;span class="si"&gt;{message}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 设置日志输出到文件&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myapp.log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rotation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;1 week&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;compression&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;zip&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;# 设置日志回滚&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myapp.log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rotation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;10 MB&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;compression&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;zip&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ERROR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;记录日志&lt;/h3&gt;
+&lt;p&gt;使用 Loguru 记录日志非常简单，您可以直接调用 &lt;code&gt;logger&lt;/code&gt; 对象的相应方法来记录不同级别的日志：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This is a debug message&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This is an info message&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;warning&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This is a warning message&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This is an error message&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;critical&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This is a critical message&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;异常处理&lt;/h3&gt;
+&lt;p&gt;Loguru 可以自动捕捉未处理的异常，并将其记录为日志：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;ZeroDivisionError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exception&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Attempted to divide by zero&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;装饰器&lt;/h3&gt;
+&lt;p&gt;Loguru 还提供了装饰器，可以用来记录函数的执行时间或捕获函数中的异常：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nd"&gt;@logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;catch&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_function&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# 函数代码&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="nd"&gt;@logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_timed_function&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# 函数代码&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;高级用法示例&lt;/h2&gt;
+&lt;p&gt;Loguru 提供了许多高级用法，这些功能可以帮助您更有效地进行日志记录和管理。以下是一些高级用法的示例：&lt;/p&gt;
+&lt;h3&gt;1. 自定义日志处理器&lt;/h3&gt;
+&lt;p&gt;您可以使用 &lt;code&gt;add()&lt;/code&gt; 方法来添加自定义的日志处理器，例如将日志输出到不同的文件或位置：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 将日志输出到控制台和文件&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;stdout&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;INFO&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myapp.log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ERROR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;2. 动态更改日志级别&lt;/h3&gt;
+&lt;p&gt;您可以在运行时动态更改日志级别，以适应不同的调试需求：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 动态更改日志级别&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;WARNING&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;3. 日志回滚&lt;/h3&gt;
+&lt;p&gt;Loguru 支持日志文件的自动回滚，例如，当日志文件达到一定大小或一定时间后自动创建新文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 每天回滚日志文件&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myapp.log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rotation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;1 day&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 达到一定大小后回滚&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myapp.log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rotation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;10 MB&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;4. 日志压缩&lt;/h3&gt;
+&lt;p&gt;当日志文件回滚时，旧的日志文件可以被压缩，以节省存储空间：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myapp.log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rotation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;1 week&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;compression&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;zip&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;5. 过滤日志&lt;/h3&gt;
+&lt;p&gt;您可以使用过滤器来控制哪些日志消息应该被记录：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;record&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;record&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;level&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;  &lt;span class="c1"&gt;# 只记录ERROR及以上级别的日志&lt;/span&gt;
+
+&lt;span class="c1"&gt;# 添加带有过滤器的日志处理器&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myapp.log&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;filter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;my_filter&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;6. 格式化日志&lt;/h3&gt;
+&lt;p&gt;您可以自定义日志的格式，包括时间戳、日志级别、消息等：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# 自定义日志格式&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;[{time:YYYY-MM-DD at HH:mm:ss.SSS}] &lt;/span&gt;&lt;span class="si"&gt;{level:&amp;lt;8}&lt;/span&gt;&lt;span class="s2"&gt; | &lt;/span&gt;&lt;span class="si"&gt;{message}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;format_time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strftime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;%Y-%m-&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; %H:%M:%S.&lt;/span&gt;&lt;span class="si"&gt;%f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)[:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;7. 记录异常信息&lt;/h3&gt;
+&lt;p&gt;Loguru 可以自动记录异常信息，包括堆栈跟踪，这对于调试非常有帮助：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="c1"&gt;# 可能引发异常的代码&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;Exception&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;exception&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;An error occurred&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;8. 使用上下文管理器&lt;/h3&gt;
+&lt;p&gt;Loguru 还提供了上下文管理器，允许您临时更改日志记录的行为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;contextualize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;extra&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;component&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;auth&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+    &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;This log message will have an &amp;#39;extra&amp;#39; field with &amp;#39;component&amp;#39; key&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;9. 性能测试&lt;/h3&gt;
+&lt;p&gt;Loguru 还可以用来测量代码块的执行时间，这对于性能测试非常有用：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# 执行一些操作&lt;/span&gt;
+    &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;10. 集成第三方库&lt;/h3&gt;
+&lt;p&gt;Loguru 可以与许多第三方库集成，例如 Flask、Django 等，以提供更丰富的日志记录功能。&lt;/p&gt;
+&lt;p&gt;这些高级用法展示了 Loguru 的灵活性和强大功能，使其成为 Python 日志记录的强大工具。&lt;/p&gt;</content><category term="开发"></category><category term="python"></category></entry><entry><title>脚本梳理</title><link href="/script-dev.html" rel="alternate"></link><published>2024-10-31T00:00:00+08:00</published><updated>2024-10-31T00:00:00+08:00</updated><author><name>xiangyang</name></author><id>tag:None,2024-10-31:/script-dev.html</id><summary type="html">&lt;p&gt;一些脚本的梳理&lt;/p&gt;</summary><content type="html">&lt;h1&gt;开发环境配置&lt;/h1&gt;
+&lt;h2&gt;windows激活虚拟环境&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;@echo&lt;/span&gt; &lt;span class="n"&gt;off&lt;/span&gt;
+&lt;span class="n"&gt;REM&lt;/span&gt; &lt;span class="n"&gt;设置虚拟环境的路径&lt;/span&gt;
+&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="n"&gt;VENV_PATH&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:\&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;\&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="p"&gt;\&lt;/span&gt;&lt;span class="n"&gt;your&lt;/span&gt;&lt;span class="p"&gt;\&lt;/span&gt;&lt;span class="n"&gt;venv&lt;/span&gt;
+
+&lt;span class="n"&gt;REM&lt;/span&gt; &lt;span class="n"&gt;检查虚拟环境目录是否存在&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;exist&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;%VENV_PATH%&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="nb"&gt;echo &lt;/span&gt;&lt;span class="n"&gt;虚拟环境目录不存在&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;%&lt;/span&gt;&lt;span class="n"&gt;VENV_PATH&lt;/span&gt;&lt;span class="p"&gt;%&lt;/span&gt;
+    &lt;span class="n"&gt;exit&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="n"&gt;1&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;REM&lt;/span&gt; &lt;span class="n"&gt;激活虚拟环境&lt;/span&gt;
+&lt;span class="n"&gt;call&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;%VENV_PATH%\Scripts\activate.bat&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;REM&lt;/span&gt; &lt;span class="n"&gt;提示用户虚拟环境已激活&lt;/span&gt;
+&lt;span class="nb"&gt;echo &lt;/span&gt;&lt;span class="n"&gt;虚拟环境已激活&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="k"&gt;%&lt;/span&gt;&lt;span class="n"&gt;VENV_PATH&lt;/span&gt;&lt;span class="p"&gt;%&lt;/span&gt;
+
+&lt;span class="n"&gt;REM&lt;/span&gt; &lt;span class="n"&gt;保持命令提示符窗口打开&lt;/span&gt;
+&lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;MySQL 初始化和启动脚本&lt;/h2&gt;
+&lt;p&gt;配置文件样例:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[mysql]&lt;/span&gt;
+&lt;span class="c1"&gt;# 设置mysql客户端默认字符集&lt;/span&gt;
+&lt;span class="na"&gt;default-character-set&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;utf8mb4&lt;/span&gt;
+&lt;span class="k"&gt;[mysqld]&lt;/span&gt;
+&lt;span class="c1"&gt;# 设置3306端口&lt;/span&gt;
+&lt;span class="na"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;3306&lt;/span&gt;
+&lt;span class="c1"&gt;# 设置mysql的安装目录&lt;/span&gt;
+&lt;span class="na"&gt;basedir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;D:\\soft\\database\\MySQL\\mysql-8.0.25-winx64&lt;/span&gt;
+&lt;span class="na"&gt;datadir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;D:\\soft\\database\\MySQL\\mysql-8.0.25-winx64\\data&lt;/span&gt;
+&lt;span class="c1"&gt;# 允许最大连接数&lt;/span&gt;
+&lt;span class="na"&gt;max_connections&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;20&lt;/span&gt;
+&lt;span class="c1"&gt;# 服务端使用的字符集默认为8比特编码的latin1字符集&lt;/span&gt;
+&lt;span class="na"&gt;character-set-server&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;utf8mb4&lt;/span&gt;
+&lt;span class="c1"&gt;# 创建新表时将使用的默认存储引擎&lt;/span&gt;
+&lt;span class="na"&gt;default-storage-engine&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;INNODB&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;命令行:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;.\mysqld.exe --defaults-file=D:\soft\database\MySQL\mysql-8.0.25-winx64\init.ini --initialize --console
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;不使用配置文件:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;.\mysqld.exe --initialize --console
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;修改密码:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;ALTER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;USER&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;root&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;localhost&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;IDENTIFIED&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;BY&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;新密码&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;启动脚本:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;@echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;off&lt;/span&gt;
+&lt;span class="nv"&gt;@echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Mysql&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;startup&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="k"&gt;start&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;mysqld&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exe&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+&lt;span class="k"&gt;exit&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Minio 启动脚本&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;off&lt;/span&gt;
+&lt;span class="n"&gt;REM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;设置MinIO可执行文件的路径&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;MINIO_EXE&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="n"&gt;soft&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="n"&gt;minio&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="n"&gt;minio&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exe&lt;/span&gt;
+
+&lt;span class="n"&gt;REM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;设置数据存储路径&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;DATA_DIR&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="n"&gt;soft&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="n"&gt;minio&lt;/span&gt;&lt;span class="o"&gt;\&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;
+
+&lt;span class="n"&gt;REM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;设置访问密钥和秘密密钥&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;ACCESS_KEY&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;PoKA5wjIviAbqIbnElWY&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;SECRET_KEY&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;bSHt5Yd3wE3VV2CIWHLf9FrwSsH6FJDoIvBLYLJE&lt;/span&gt;
+
+&lt;span class="n"&gt;REM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;设置端口号&lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;PORT&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;9000&lt;/span&gt;
+
+&lt;span class="n"&gt;REM&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;启动MinIO服务&lt;/span&gt;
+&lt;span class="c"&gt;%MINIO_EXE% server %DATA_DIR% --address &amp;quot;:%PORT%&amp;quot; --console-address &amp;quot;:9001&amp;quot;&lt;/span&gt;
+
+&lt;span class="nb"&gt;pause&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="开发"></category><category term="脚本开发"></category><category term="python"></category></entry></feed>
