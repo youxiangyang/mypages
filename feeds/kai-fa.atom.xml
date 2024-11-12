@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>沐子 - 开发</title><link href="/" rel="alternate"></link><link href="/feeds/kai-fa.atom.xml" rel="self"></link><id>/</id><updated>2024-10-31T00:00:00+08:00</updated><entry><title>Jinja2 库使用</title><link href="/jinja2-ku-shi-yong.html" rel="alternate"></link><published>2024-10-31T00:00:00+08:00</published><updated>2024-10-31T00:00:00+08:00</updated><author><name>xiangyang</name></author><id>tag:None,2024-10-31:/jinja2-ku-shi-yong.html</id><summary type="html">&lt;p&gt;Jinja2 是一个现代的、设计友好的模板语言，用于 Python，它允许你在 HTML、XML 或其他文本格式中嵌入 Python 代码&lt;/p&gt;</summary><content type="html">&lt;p&gt;@[toc]&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>沐子 - 开发</title><link href="https://youxiangyang.github.io/mypages.github.io/" rel="alternate"></link><link href="https://youxiangyang.github.io/mypages.github.io/feeds/kai-fa.atom.xml" rel="self"></link><id>https://youxiangyang.github.io/mypages.github.io/</id><updated>2024-10-31T00:00:00+08:00</updated><entry><title>Jinja2 库使用</title><link href="https://youxiangyang.github.io/mypages.github.io/jinja2-ku-shi-yong.html" rel="alternate"></link><published>2024-10-31T00:00:00+08:00</published><updated>2024-10-31T00:00:00+08:00</updated><author><name>xiangyang</name></author><id>tag:youxiangyang.github.io,2024-10-31:/mypages.github.io/jinja2-ku-shi-yong.html</id><summary type="html">&lt;p&gt;Jinja2 是一个现代的、设计友好的模板语言，用于 Python，它允许你在 HTML、XML 或其他文本格式中嵌入 Python 代码&lt;/p&gt;</summary><content type="html">&lt;p&gt;@[toc]&lt;/p&gt;
 &lt;p&gt;在Jinja2中，可以使用字符串作为模板源而非文件路径。这可以通过创建一个&lt;code&gt;Template&lt;/code&gt;对象并直接传入模板字符串来实现。下面是一个简单的例子说明如何做到这一点：&lt;/p&gt;
 &lt;p&gt;首先，确保已经安装了Jinja2库。如果还没有安装，可以通过pip安装：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;jinja2
@@ -116,7 +116,7 @@
 这些是 Jinja2 模板语言的一些基本语法和功能。Jinja2 的强大之处在于它的灵活性和易于扩展性，允许开发者根据自己的需求定制模板的功能。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</content><category term="开发"></category><category term="python"></category></entry><entry><title>Loguru 库使用</title><link href="/loguru-ku-shi-yong.html" rel="alternate"></link><published>2024-10-31T00:00:00+08:00</published><updated>2024-10-31T00:00:00+08:00</updated><author><name>xiangyang</name></author><id>tag:None,2024-10-31:/loguru-ku-shi-yong.html</id><summary type="html">&lt;p&gt;Loguru 是一个 Python 日志库，它提供了一种简单而强大的方式来记录日志，使得日志记录变得轻松愉快。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;快速使用&lt;/h2&gt;
+&lt;/ol&gt;</content><category term="开发"></category><category term="python"></category></entry><entry><title>Loguru 库使用</title><link href="https://youxiangyang.github.io/mypages.github.io/loguru-ku-shi-yong.html" rel="alternate"></link><published>2024-10-31T00:00:00+08:00</published><updated>2024-10-31T00:00:00+08:00</updated><author><name>xiangyang</name></author><id>tag:youxiangyang.github.io,2024-10-31:/mypages.github.io/loguru-ku-shi-yong.html</id><summary type="html">&lt;p&gt;Loguru 是一个 Python 日志库，它提供了一种简单而强大的方式来记录日志，使得日志记录变得轻松愉快。&lt;/p&gt;</summary><content type="html">&lt;h2&gt;快速使用&lt;/h2&gt;
 &lt;h3&gt;安装 Loguru&lt;/h3&gt;
 &lt;p&gt;首先，您需要通过 pip 安装 Loguru：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;loguru
@@ -240,7 +240,7 @@
 
 &lt;h3&gt;10. 集成第三方库&lt;/h3&gt;
 &lt;p&gt;Loguru 可以与许多第三方库集成，例如 Flask、Django 等，以提供更丰富的日志记录功能。&lt;/p&gt;
-&lt;p&gt;这些高级用法展示了 Loguru 的灵活性和强大功能，使其成为 Python 日志记录的强大工具。&lt;/p&gt;</content><category term="开发"></category><category term="python"></category></entry><entry><title>脚本梳理</title><link href="/script-dev.html" rel="alternate"></link><published>2024-10-31T00:00:00+08:00</published><updated>2024-10-31T00:00:00+08:00</updated><author><name>xiangyang</name></author><id>tag:None,2024-10-31:/script-dev.html</id><summary type="html">&lt;p&gt;一些脚本的梳理&lt;/p&gt;</summary><content type="html">&lt;h1&gt;开发环境配置&lt;/h1&gt;
+&lt;p&gt;这些高级用法展示了 Loguru 的灵活性和强大功能，使其成为 Python 日志记录的强大工具。&lt;/p&gt;</content><category term="开发"></category><category term="python"></category></entry><entry><title>脚本梳理</title><link href="https://youxiangyang.github.io/mypages.github.io/script-dev.html" rel="alternate"></link><published>2024-10-31T00:00:00+08:00</published><updated>2024-10-31T00:00:00+08:00</updated><author><name>xiangyang</name></author><id>tag:youxiangyang.github.io,2024-10-31:/mypages.github.io/script-dev.html</id><summary type="html">&lt;p&gt;一些脚本的梳理&lt;/p&gt;</summary><content type="html">&lt;h1&gt;开发环境配置&lt;/h1&gt;
 &lt;h2&gt;windows激活虚拟环境&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;@echo&lt;/span&gt; &lt;span class="n"&gt;off&lt;/span&gt;
 &lt;span class="n"&gt;REM&lt;/span&gt; &lt;span class="n"&gt;设置虚拟环境的路径&lt;/span&gt;
